@@ -18,6 +18,12 @@ on:
       tag:
         required: true
         type: string
+      artifact-path:
+        required: true
+        type: string
+      deploy-script:
+        required: true
+        type: string
 
     secrets:
       HOST:
@@ -57,7 +63,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: my-artifact
-          path: build/libs/
+          path: ${{inputs.artifact-path}}
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -95,7 +101,4 @@ jobs:
           username: ${{secrets.SSH_USER}}
           key: ${{secrets.SSH_PRIVATE_KEY}}
           port: 22
-          script: |
-            cd docker-compose
-            sudo docker compose pull |
-            sudo  docker compose up -d        
+          script: ${{inputs.deploy-script}}
