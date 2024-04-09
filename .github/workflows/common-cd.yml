@@ -62,7 +62,7 @@ jobs:
       - name: Download JAR artifact
         uses: actions/download-artifact@v4
         with:
-          name: my-artifact
+          name: artifact_${{inputs.artifact-path}}
           path: ${{inputs.artifact-path}}
       - name: Build and push
         uses: docker/build-push-action@v5
