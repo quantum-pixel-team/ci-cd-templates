@@ -52,7 +52,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_${{inputs.artifact-path}}
+          name: my-artifact
           path: ${{inputs.artifact-path}}
 
   sonarcloud:
