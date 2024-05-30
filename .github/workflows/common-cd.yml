@@ -42,7 +42,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    environment: ${{inputs.environment}}
+    environment: ${{inputs.environment}}_docker
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,12 +77,15 @@ jobs:
 
   deploy-dev:
     needs: docker
+    environment: ${{inputs.environment}}
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: "verify variable"
+        run: echo ${{inputs.environment}} || echo ${{secrets.HOST}}
       - name: "Deploy to dev"
         uses: milanmk/actions-file-deployer@master
         with:
