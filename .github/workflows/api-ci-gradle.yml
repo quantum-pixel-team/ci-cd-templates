@@ -37,7 +37,7 @@ jobs:
   #       run: gradle integTest
 
   build:
-    needs: [integration-test,unit-test]
+    needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
